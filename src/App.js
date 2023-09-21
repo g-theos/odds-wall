@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useEffect, useState } from 'react';
 import './App.css';
+import Table from './components/Table';
+import useHttp from './hooks/useHttp';
 
 function App() {
+  const { isLoading, error, sendRequest: fetchOdds } = useHttp();
+  const [odds,setOdds] = useState([]);
+
+  useEffect(() => {
+    const transformOdds = (oddsArray) => {
+      //console.log(oddsArray);
+      setOdds(oddsArray);
+    }
+
+    fetchOdds(
+      //{url: process.env.REACT_APP_ODDS_API_URL},
+      {url: './data.json'},
+      transformOdds
+    );
+  }, [])
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      <Table odds={odds}/>
     </div>
   );
 }
