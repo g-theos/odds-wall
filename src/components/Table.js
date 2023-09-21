@@ -3,6 +3,7 @@ import ExpandTable from './ExpandTable';
 import './Table.css';
 
 const Table = (props) => {
+  
   const [clickedRow, setClickedRow] = useState(
     new Array(props.odds.length).fill(false)
   );
@@ -72,7 +73,7 @@ const Table = (props) => {
         </tr>
       </thead>
       {props.odds.map((match, index) => (
-        <>
+        <tbody>
           <tr key={match.id} onClick={() => clickHandler(index)}>
             <td>{match.commence_time.slice(0, 10)}</td>
             <td>{match.commence_time.slice(11, 16)}</td>
@@ -145,7 +146,7 @@ const Table = (props) => {
               totals={totals}
             />
           )}
-        </>
+        </tbody>
       ))}
     </table>
   );

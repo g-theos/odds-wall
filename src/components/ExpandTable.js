@@ -1,4 +1,5 @@
 const ExpandTable = (props) => {
+  
   return props.odds
     .filter((match) => match.id === props.matchId)
     .flatMap((match) => match.bookmakers)
@@ -29,20 +30,21 @@ const ExpandTable = (props) => {
               )}
           </td>
         ))}
-        {['Over','Under'].map(bet => 
-        props.totals.map((total) => (
-          <td>
-            {bookmaker.markets
-              .filter((market) => market.key === 'totals')
-              .flatMap(
-                (market) =>
-                  market.outcomes.find(
-                    (outcome) =>
-                      outcome.point === total && outcome.name === bet
-                  )?.price
-              )}
-          </td>
-        )))}
+        {['Over', 'Under'].map((bet) =>
+          props.totals.map((total) => (
+            <td>
+              {bookmaker.markets
+                .filter((market) => market.key === 'totals')
+                .flatMap(
+                  (market) =>
+                    market.outcomes.find(
+                      (outcome) =>
+                        outcome.point === total && outcome.name === bet
+                    )?.price
+                )}
+            </td>
+          ))
+        )}
       </tr>
     ));
 };

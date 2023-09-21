@@ -14,8 +14,8 @@ function App() {
     }
 
     fetchOdds(
-      //{url: process.env.REACT_APP_ODDS_API_URL},
-      {url: './data.json'},
+      {url: process.env.REACT_APP_ODDS_API_URL},
+      //{url: './data.json'},
       transformOdds
     );
   }, [])
